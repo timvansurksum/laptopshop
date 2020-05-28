@@ -1,47 +1,18 @@
 <?php
+    include("classes.php");
+    // include("./sanitize.php");
 
 if (empty($_POST["email"])) {
     header("Location: ./index.php?content=message&alert=no-email");
 } else {
-    include("./connect_db.php");
-    include("./sanitize.php");
-    $email = sanitize($_POST["email"]);
-    $sql = "SELECT * from  `users` WHERE `e-mail` = '{$email}'";
-    $result = mysqli_query($conn, $sql);
-    var_dump($result);
-    // hoeveel records heeft het resultaat van de select query
+
+    
 
 
     if (mysqli_num_rows($result)) {
         header("location: ./index.php?content=message&alert=emailexists");
     } else {
-        $ut = time();
-        $mut = microtime();
 
-        $time = explode(" ", $mut);
-
-        $onehour = mktime(2, 0 , 0 , 1 , 1 , 1970);
-
-        $t = date("H:i:s D-d-M-Y", ($ut + $onehour));
-        $d = date("l d-M-Y", ($ut + $onehour));
-
-        $password = $time[1] * $time[0] * 1000000;
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        // id	first_name	infix	last_name	email	role	username
-        $sql = "INSERT INTO `users` (`id`,
-                                    `e-mail`,
-                                    `password`,
-                                    `role`)
-                                VALUES (NUll,
-                                        '$email',
-                                        '$password_hash',
-                                        'user')";
-        // vuur de query af op de database
-        // deze functie haalt het laats gegenerreerde id op uit de database
-
-        $result = mysqli_query($conn, $sql);
-        var_dump($result);
-        $id = mysqli_insert_id($conn);
         if ($result) {
             $to = $email;
             $message = '<!DOCTYPE html>
