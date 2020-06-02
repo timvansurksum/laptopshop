@@ -8,9 +8,12 @@ class register {
             $data = mysqli_real_escape_string($conn, $data);
             return $data;
     }
-    function check($first_name, $infix, $last_name, $email, $username){
+    function check_for_registration($first_name, $infix, $last_name, $email, $username){
         include("connect_db.php");
         $clean_email = $this->sanitize($email);
+        $clean_first_name = $this->sanitize($email); 
+        $clean_infix = $this->sanitize($email);
+        $clean_last_name = $this->sanitize($email);
         $clean_username = $this->sanitize($username);
         $sql = "SELECT * from  `users` WHERE `e-mail` = '{$email}'";
         $result_email = mysqli_query($conn, $sql);
