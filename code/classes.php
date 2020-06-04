@@ -7,10 +7,22 @@ class register {
     var $email;
     var $username;
     var $conn;
+
+
+    function  __construct()
+    {
+    define("SERVERNAME" ,"localhost");
+    define("DB" ,"laptopshop");
+    define("USERNAME" ,"targa2002260");
+    define("PASSWORD" ,"9januari");
+    $this->conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DB);
+    
+    }
+
     function sanitize($raw_data) {
-            global $conn;
+            $this->conn;
             $data = htmlspecialchars($raw_data);
-            $data = mysqli_real_escape_string($conn, $data);
+            $data = mysqli_real_escape_string($this->conn, $data);
             return $data;
     }
 
@@ -31,13 +43,12 @@ class register {
         return mysqli_num_rows($result_username);
     }
 
-    function enter_DB(){
+    function register_confirm(){
         $clean_first_name = $this->sanitize($this->first_name); 
         $clean_infix = $this->sanitize($this->infix);
         $clean_last_name = $this->sanitize($this->last_name);        
         $clean_email = $this->sanitize($this->email);
         $clean_username = $this->sanitize($this->username);
-        
         $ut = time();
         $mut = microtime();
         $time = explode(" ", $mut);
@@ -46,32 +57,33 @@ class register {
 
         $t = date("H:i:s D-d-M-Y", ($ut + $onehour));
         $d = date("l d-M-Y", ($ut + $onehour));
-
         $password = $time[1] * $time[0] * 1000000;
-        echo $password;
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
-        // id	first_name	infix	last_name	email	role	username
+
         $sql = "INSERT INTO `users` (`id`,
                                     `first_name`,
                                     `infix`,
                                     `last_name`,
                                     `email`,
                                     `role`,
-                                    `username`)
+                                    `username`,
+                                    password)
                                 VALUES (NUll,
                                         '$clean_first_name',
                                         '$clean_infix',
                                         '$clean_last_name',
                                         '$clean_email',
                                         'user',
+                                        '$clean_username',
                                         '$password_hash')";
         // vuur de query af op de database
         // deze functie haalt het laats gegenerreerde id op uit de database
 
         $result = mysqli_query($this->conn, $sql);
+
+        var_dump($result);        
         $id = mysqli_insert_id($this->conn);
-        $id = mysqli_insert_id($this->conn);
-        $this->enter_DB();
+        if ($result){
         $to = $clean_email;
         $message = '<!DOCTYPE html>
         <html lang="en">
@@ -104,6 +116,9 @@ class register {
         mail($to, $subject, $message, $headers);
         header("location: ./index.php?content=message&alert=succes");
     }
+    else {
+        header("location: ./index.php?content=message&alert=insert-mail-error");
+    }
+    }
 
 }
-?>
