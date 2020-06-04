@@ -6,7 +6,8 @@ if (empty($_POST["email"])) {
     header("Location: ./index.php?content=message&alert=no-email");
 } else {
 
-    
+    $register->check_for_registration($_POST['email'], $_POST["username"]);
+    if ($result_email)
 
 
     if (mysqli_num_rows($result)) {
