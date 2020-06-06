@@ -29,7 +29,7 @@ header("location: ./index.php?content=message&alert=hacker-alert");
                 </form>
             </div>
             <div class="col-12 col-sm-6">
-                <img class="form-img" src="https://www.verdermethersenletsel.nl/media/drankgebruik-en-afasie/normal/communicatie.png" alt="afasie info">
+                <img class="form-img" src="" alt="">
             </div>
         </div>
     </div>
