@@ -14,6 +14,13 @@ switch ($_GET["alert"]) {
         Please fill in an email
         </div>';
         break;
+        case 'no-username':
+            echo '<div class="alert mx-auto mt-5 alert-info" role="alert ">
+            No username filled in
+            <hr>
+            Please fill in an username
+            </div>';
+            break;
     case 'emailexists':
         echo '<div class="alert mx-auto mt-5 alert-danger" role="alert ">
         We already have this email 
