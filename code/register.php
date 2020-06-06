@@ -1,3 +1,4 @@
+<!-- form to register on the website -->
 <div class="container">
     <form action="./index.php?content=email_script" method="post">
         <div class="col-6">

@@ -1,11 +1,16 @@
 <?php
+
+    // gets all the $_get variables and puts them in their corresponding variables
 $alert = (isset($_GET["alert"])) ? $_GET["alert"] : "default";
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 $pwh = (isset($_GET["pwh"])) ? $_GET["pwh"] : "";
 $username = (isset($_GET["username"])) ? $_GET["username"] : "";
 
+    // sets a default value for the refresh time and page for the redirection
 $time = 3;
 $page = "register";
+
+    // all the indevidual alerts
 switch ($_GET["alert"]) {
     case 'no-email':
         echo '<div class="alert mx-auto mt-5 alert-info" role="alert ">
@@ -103,7 +108,9 @@ switch ($_GET["alert"]) {
         </div>';
         break;
     default:
+            // goes to the standard refresh page "home.php"
         header("location: ./index.php?content=home");
         break;
 }
+    // refreshes to a new page
 header("Refresh: $time; url=./index.php?content=$page");

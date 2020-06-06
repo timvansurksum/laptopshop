@@ -1,9 +1,14 @@
 <?php
+
+    // this checks if the $_get array has the value's content, id , and pwh
 if (!(isset($_GET["content"]) && isset($_GET["id"]) && isset($_GET["pwh"]))){
- header("location: ./index.php?content=message&alert=hacker-alert");
-    
+
+    // if the code does not include one of the the user will be redirected to a hacker alert
+header("location: ./index.php?content=message&alert=hacker-alert");
 }
 ?>
+
+<!-- a form to update your password -->
 <div class="text">
     <div class="container">
         <div class="row">
