@@ -1,22 +1,19 @@
 <?php
 
 class register {
+    
     var $first_name;
     var $infix;
     var $last_name;
     var $email;
     var $username;
     var $conn;
+    var $password;
 
 
     function  __construct()
     {
-    define("SERVERNAME" ,"localhost");
-    define("DB" ,"laptopshop");
-    define("USERNAME" ,"targa2002260");
-    define("PASSWORD" ,"9januari");
-    $this->conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DB);
-    
+        include("./connect_DB.php");
     }
 
     function sanitize($raw_data) {
@@ -119,14 +116,5 @@ class register {
             header("location: ./index.php?content=message&alert=insert-mail-error");
         }
     }
-
-}
-class activate {
-    
-
-
-
-
-
 
 }

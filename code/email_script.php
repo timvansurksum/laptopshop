@@ -1,7 +1,5 @@
 <?php
-// include("connect_db.php");
 include("classes.php");
-// include("./sanitize.php");
 $register1 = new register();
 $register1->first_name = $_POST["first_name"];
 $register1->infix = $_POST["infix"];
