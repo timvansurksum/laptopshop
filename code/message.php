@@ -2,6 +2,7 @@
 $alert = (isset($_GET["alert"])) ? $_GET["alert"] : "default";
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 $pwh = (isset($_GET["pwh"])) ? $_GET["pwh"] : "";
+$username = (isset($_GET["username"])) ? $_GET["username"] : "";
 
 $time = 3;
 $page = "register";
@@ -20,6 +21,13 @@ switch ($_GET["alert"]) {
         try another one
         </div>';
         break;
+        case 'username-exists':
+            echo '<div class="alert mx-auto mt-5 alert-danger" role="alert ">
+            We already have a user with the username ' . $username . '
+            <hr>
+            try another one
+            </div>';
+            break;
     case 'insert-mail-error';
         echo '<div class="primairy mx-auto mt-5 alert-danger" role="alert ">
         registration failed

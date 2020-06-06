@@ -15,13 +15,14 @@ if (empty($_POST["email"])) {
 } else {
     if ($register1->check_for_registration_email()) {
         header("location: ./index.php?content=message&alert=emailexists");
-        echo "mail excists";
+        echo "mail exists";
     } else {
 
         if ($register1->check_for_registration_username()) {
-            header("location: ./index.php?content=message&alert=insert-mail-error");
+            header("location: ./index.php?content=message&alert=username-exists&username=$register1->username");
             echo 'username taken';
-        } else {
+        } 
+        else {
         echo "send mail";
         $register1->register_confirm();
         }
