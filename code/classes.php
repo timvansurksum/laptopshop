@@ -38,6 +38,15 @@ class register {
         return mysqli_num_rows($result_username); 
         
     }
+    function hash() {
+        return password_hash($this->password, PASSWORD_BCRYPT);
+        if (empty($this->password_check)) {
+            
+        }
+        else {
+        return password_hash($this->password_check, PASSWORD_BCRYPT);
+        }
+    }
         // this functions enters user registration data in the users database and then (if it succesfully enters the database) sends a confirmation mail
     function register_confirm(){
             // clean all input info
@@ -57,8 +66,8 @@ class register {
         $d = date("l d-M-Y", ($ut + $onehour));
 
             // creates password based on time $ hashes the password
-        $password = $time[1] * $time[0] * 1000000;
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $this->password = $time[1] * $time[0] * 1000000;
+        $password_hash = password_hash();
 
 
             // defines a input command for SQL with the sanitized user data

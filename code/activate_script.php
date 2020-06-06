@@ -3,16 +3,11 @@
 include("./classes.php");
 
  
-    $register1 = new register();
-    $register1->first_name = $_POST["first_name"];
-    $register1->infix = $_POST["infix"];
-    $register1->last_name = $_POST["last_name"];
-    $register1->email = $_POST["email"];
-    $register1->username = $_POST["username"];
-    // $id = sanitize($_POST["id"]);
-    // $pwh = sanitize($_POST["pwh"]);
-    // $password = sanitize($_POST["password"]);
-    // $passwordcheck = sanitize($_POST["password-check"]);
+    $register2 = new register();
+    $register2->id = $register->sanitize($_POST["id"]);
+    $register2->password = $register->sanitize($_POST["pwh"]);
+    $register2->password = $register->sanitize($_POST["password"]);
+    $register2->password_check = $register->sanitize($_POST["password-check"]);
 
     if (empty($_POST["password"]) || empty($_POST["password-check"])) {
         header("location: ./index.php?content=message&alert=password-empty&id=$id&pwh=$pwh");
