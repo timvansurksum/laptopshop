@@ -9,6 +9,7 @@ class register {
     var $username;
     var $conn;
     var $password;
+    var $password_check;
 
         // updates $conn to make a connection to the database
     function  __construct()
@@ -38,7 +39,7 @@ class register {
         return mysqli_num_rows($result_username); 
         
     }
-    function hash() {
+    function hash_password() {
         return password_hash($this->password, PASSWORD_BCRYPT);
         if (empty($this->password_check)) {
             
@@ -67,7 +68,7 @@ class register {
 
             // creates password based on time $ hashes the password
         $this->password = $time[1] * $time[0] * 1000000;
-        $password_hash = password_hash();
+        $password_hash = $this->hash_password();
 
 
             // defines a input command for SQL with the sanitized user data

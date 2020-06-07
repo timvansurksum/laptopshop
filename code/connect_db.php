@@ -8,5 +8,5 @@ define("USERNAME" ,"targa2002260");
 define("PASSWORD" ,"9januari");
 
     // stitches the connection command to connect to the database together 
-$conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DB);
+$this->conn = mysqli_connect(SERVERNAME, USERNAME, PASSWORD, DB);
 

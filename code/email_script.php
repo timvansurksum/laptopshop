@@ -18,7 +18,7 @@ $register1->username = $_POST["username"];
         header("Location: ./index.php?content=message&alert=no-email");
     } 
     else {
-        if (empty($_post["username"])) {
+        if (empty($_POST["username"])) {
 
                 // if there is no username the user will be redirected to a alert reminding them to enter their username adress
             header("Location: ./index.php?content=message&alert=no-username");
