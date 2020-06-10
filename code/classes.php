@@ -141,4 +141,8 @@ class register {
         }
     }
 
+
+}
+class activate extends register {
+        
 }

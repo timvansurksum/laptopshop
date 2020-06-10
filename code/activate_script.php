@@ -3,7 +3,7 @@
 include("./classes.php");
 
  
-    $register2 = new register();
+    $register2 = new activate();
     $register2->id = $_POST["id"];
     $register2->pwh = $_POST["pwh"];
     $register2->password = $_POST["password"];
@@ -32,8 +32,7 @@ include("./classes.php");
                 SET `password` = '$password_hash'
                 WHERE `id` = $id
                 and `password` = '$pwh'";
-                echo $register2->conn."</br>".$sql;
-                exit;
+
             if (mysqli_query($register2->conn , $sql)){
             // .3 feedback for user
             header("location: ./index.php?content=message&alert=succesfull-activation&id=$id&pwh=$pwh");
