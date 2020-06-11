@@ -144,5 +144,33 @@ class register {
 
 }
 class activate extends register {
-        
+    function check_password_fields(){
+        if (empty($this->password) || empty($this->password_check) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    function check_for_user() {
+    
+    $id = $this->sanitize($this->id);
+    $pwh = $this->sanitize($this->pwh);
+
+    $sql = "SELECT * FROM `users` WHERE `id` = '$id' and `password` = '$pwh'";
+    $result = mysqli_query($this->conn , $sql);
+    
+    return mysqli_num_rows($result);
+    }
+    function update_password(){
+        // .1 pasword hash
+        $password_hash = $this->hash_password();
+        // .2 update script
+        $sql = "UPDATE `users` 
+                SET `password` = '$password_hash'
+                WHERE `id` = $id
+                and `password` = '$pwh'";
+
+            if (mysqli_query($this->conn , $sql))
+        }
 }
