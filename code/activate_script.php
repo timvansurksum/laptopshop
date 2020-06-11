@@ -4,10 +4,10 @@ include("./classes.php");
 
  
     $activate = new activate();
-    $activate->id = $_POST["id"];
-    $activate->pwh = $_POST["pwh"];
-    $activate->password = $_POST["password"];
-    $activate->password_check = $_POST["password-check"];
+    $activate->id = $activate->sanitize($_POST["id"]);
+    $activate->pwh = $activate->sanitize($_POST["pwh"]);
+    $activate->password = $activate->sanitize($_POST["password"]);
+    $activate->password_check = $activate->sanitize($_POST["password-check"]);
     
     $id = $activate->sanitize($activate->id);
     $pwh = $activate->sanitize($activate->pwh);
@@ -19,10 +19,9 @@ include("./classes.php");
         header("location: ./index.php?content=message&alert=passwords-unmatched&id=$id&pwh=$pwh");
     }
     else {
-        if($activate->check_for_user())
-        {
+        if ($activate->check_for_user()) {
         // update password
-            if (update_password()){}
+            if ($activate->update_password()){
             // .3 feedback for user
             header("location: ./index.php?content=message&alert=succesfull-activation&id=$id&pwh=$pwh");
             }

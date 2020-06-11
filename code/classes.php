@@ -145,7 +145,7 @@ class register {
 }
 class activate extends register {
     function check_password_fields(){
-        if (empty($this->password) || empty($this->password_check) {
+        if (empty($this->password) || empty($this->password_check)) {
             return true;
         }
         else {
@@ -154,10 +154,8 @@ class activate extends register {
     }
     function check_for_user() {
     
-    $id = $this->sanitize($this->id);
-    $pwh = $this->sanitize($this->pwh);
 
-    $sql = "SELECT * FROM `users` WHERE `id` = '$id' and `password` = '$pwh'";
+    $sql = "SELECT * FROM `users` WHERE `id` = '$this->id' and `password` = '$this->pwh'";
     $result = mysqli_query($this->conn , $sql);
     
     return mysqli_num_rows($result);
@@ -168,9 +166,9 @@ class activate extends register {
         // .2 update script
         $sql = "UPDATE `users` 
                 SET `password` = '$password_hash'
-                WHERE `id` = $id
-                and `password` = '$pwh'";
+                WHERE `id` = $this->id
+                and `password` = '$this->pwh'";
 
-            if (mysqli_query($this->conn , $sql))
+             return mysqli_query($this->conn , $sql);
         }
 }

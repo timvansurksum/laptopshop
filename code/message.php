@@ -10,7 +10,7 @@ $username = (isset($_GET["username"])) ? $_GET["username"] : "";
 $time = 3;
 $page = "register";
 
-    // all the indevidual alerts
+    // all the indavidual alerts
 switch ($_GET["alert"]) {
     case 'no-email':
         echo '<div class="alert mx-auto mt-5 alert-info" role="alert ">
