@@ -14,7 +14,6 @@
                     </div>
                     <input type="submit" class="btn btn-danger" value="Login">
                     <h5 id="username" class="form-text text-muted">login</h5>
-                    <h5 id="passwordhelp" class="form-text text-muted">login</h5>
                 </form>
             </div>
             <div class="col-12 col-sm-6">
