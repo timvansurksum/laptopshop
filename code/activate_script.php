@@ -3,40 +3,39 @@
 include("./classes.php");
 
  
-    $register1 = new register();
-    $register1->first_name = $_POST["first_name"];
-    $register1->infix = $_POST["infix"];
-    $register1->last_name = $_POST["last_name"];
-    $register1->email = $_POST["email"];
-    $register1->username = $_POST["username"];
-    // $id = sanitize($_POST["id"]);
-    // $pwh = sanitize($_POST["pwh"]);
-    // $password = sanitize($_POST["password"]);
-    // $passwordcheck = sanitize($_POST["password-check"]);
+    $register2 = new activate();
+    $register2->id = $_POST["id"];
+    $register2->pwh = $_POST["pwh"];
+    $register2->password = $_POST["password"];
+    $register2->password_check = $_POST["password-check"];
+    
+    $id = $register2->sanitize($register2->id);
+    $pwh = $register2->sanitize($register2->pwh);
 
     if (empty($_POST["password"]) || empty($_POST["password-check"])) {
         header("location: ./index.php?content=message&alert=password-empty&id=$id&pwh=$pwh");
         }
-    elseif (strcmp($password, $passwordcheck)) {
+    elseif (strcmp($register2->password, $register2->password_check)) {
         header("location: ./index.php?content=message&alert=passwords-unmatched&id=$id&pwh=$pwh");
     }
     else {
-        $sql = "SELECT * FROM `users` WHERE `id` = $id and `password` = '$pwh'";
+        $sql = "SELECT * FROM `users` WHERE `id` = '$id' and `password` = '$pwh'";
 
-        $result = mysqli_query($conn , $sql);
+        $result = mysqli_query($register2->conn , $sql);
         if (mysqli_num_rows($result))
         {
         // update
         // .1 pasword hash
-            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+            $password_hash = $register2->hash_password();
         // .2 update script
         $sql = "UPDATE `users` 
                 SET `password` = '$password_hash'
                 WHERE `id` = $id
                 and `password` = '$pwh'";
-            if (mysqli_query($conn , $sql)){
+
+            if (mysqli_query($register2->conn , $sql)){
             // .3 feedback for user
-            header("location: ./index.php?content=message&alert=succesfull-activation");
+            header("location: ./index.php?content=message&alert=succesfull-activation&id=$id&pwh=$pwh");
             }
             else {
             // error
