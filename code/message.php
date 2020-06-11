@@ -9,7 +9,6 @@ $username = (isset($_GET["username"])) ? $_GET["username"] : "";
     // sets a default value for the refresh time and page for the redirection
 $time = 3;
 $page = "register";
-
     // all the indavidual alerts
 switch ($_GET["alert"]) {
     case 'no-email':
@@ -71,6 +70,7 @@ switch ($_GET["alert"]) {
         you dont have rights on this page
         <hr>
         </div>';
+        exit;
         break;
     case 'passwords-unmatched';
         $time = 3;
