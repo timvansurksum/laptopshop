@@ -10,11 +10,19 @@ class register {
     var $conn;
     var $password;
     var $password_check;
-
         // updates $conn to make a connection to the database
     function  __construct()
     {
         include("./connect_DB.php");
+    }
+    function hash_password() {
+        return password_hash($this->password, PASSWORD_BCRYPT);
+        if (empty($this->password_check)) {
+            
+        }
+        else {
+        return password_hash($this->password_check, PASSWORD_BCRYPT);
+        }
     }
         // function to secure inputs against attacks by filtering/altering the input
     function sanitize($raw_data) {
@@ -23,6 +31,8 @@ class register {
             $data = mysqli_real_escape_string($this->conn, $data);
             return $data;
     }
+}
+    class register_functions extends register {
         //  checks if any entered email has already been entered in the users table
     function check_for_registration_email(){
         $clean_email = $this->sanitize($this->email);
@@ -39,15 +49,7 @@ class register {
         return mysqli_num_rows($result_username); 
         
     }
-    function hash_password() {
-        return password_hash($this->password, PASSWORD_BCRYPT);
-        if (empty($this->password_check)) {
-            
-        }
-        else {
-        return password_hash($this->password_check, PASSWORD_BCRYPT);
-        }
-    }
+
         // this functions enters user registration data in the users database and then (if it succesfully enters the database) sends a confirmation mail
     function register_confirm(){
             // clean all input info
@@ -171,4 +173,21 @@ class activate extends register {
 
              return mysqli_query($this->conn , $sql);
         }
+}
+class login extends register { 
+
+    public $result;
+
+    function check_fields(){
+        $result = isset($this->username) && isset($this->password);
+        return $result;
+    }
+    function check_if_user_exists(){
+        $sql = "SELECT `password` FROM `users` WHERE `username` = '{$this->username}'";
+        $result = mysqli_query($this->conn, $sql);
+        $result_row = mysqli_fetch_row($result);
+        $this->result = $result_row[0];
+        // Password uit db vergelijken met form password    
+        return mysqli_num_rows($result);
+    }
 }

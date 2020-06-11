@@ -3,13 +3,13 @@
 // this includes the code that includes the functions
 include("classes.php");
 
-// this creates a new instance for the class register
-$register1 = new register();
-$register1->first_name = $_POST["first_name"];
-$register1->infix = $_POST["infix"];
-$register1->last_name = $_POST["last_name"];
-$register1->email = $_POST["email"];
-$register1->username = $_POST["username"];
+// this creates a new instance for the class register_functions
+$register_functions = new register_functions();
+$register_functions->first_name = $_POST["first_name"];
+$register_functions->infix = $_POST["infix"];
+$register_functions->last_name = $_POST["last_name"];
+$register_functions->email = $_POST["email"];
+$register_functions->username = $_POST["username"];
 
     // checks if the email adress was actually filled in
     if (empty($_POST["email"])) {
@@ -26,7 +26,7 @@ $register1->username = $_POST["username"];
         else {
 
                 // checks if this email is in the users table already
-            if ($register1->check_for_registration_email()) {
+            if ($register_functions->check_for_registration_email()) {
 
                     // if this email already exists within the table the user will be redirected to a alert telling them there is already an account with this email
                 header("location: ./index.php?content=message&alert=emailexists");
@@ -34,13 +34,13 @@ $register1->username = $_POST["username"];
             else {
 
                     // checks if this username is in the users table already
-                if ($register1->check_for_registration_username()) {
+                if ($register_functions->check_for_registration_username()) {
                         // if this username already exists within the table the user will be redirected to a alert telling them there is already an account with this username
-                    header("location: ./index.php?content=message&alert=username-exists&username=$register1->username");
+                    header("location: ./index.php?content=message&alert=username-exists&username=$register_functions->username");
                 } 
                 else {
-                        // if both the username and email dont exist already the register-confirm function will be called to add them to the database and send a confirmation mail
-                    $register1->register_confirm();
+                        // if both the username and email dont exist already the register_functions-confirm function will be called to add them to the database and send a confirmation mail
+                    $register_functions->register_confirm();
                 }
             }
         }

@@ -5,6 +5,7 @@ $alert = (isset($_GET["alert"])) ? $_GET["alert"] : "default";
 $id = (isset($_GET["id"])) ? $_GET["id"] : "";
 $pwh = (isset($_GET["pwh"])) ? $_GET["pwh"] : "";
 $username = (isset($_GET["username"])) ? $_GET["username"] : "";
+$next_page = (isset($_GET["page"]));
 
     // sets a default value for the refresh time and page for the redirection
 $time = 3;
@@ -107,10 +108,36 @@ switch ($_GET["alert"]) {
         please try again
         </div>';
         break;
+        case 'incorrect-password';
+        $time = 2;
+        $page = "login";
+        echo '<div class="primairy mx-auto mt-5 alert-danger" role="alert ">
+        this password is wrong
+        <hr>
+        please try again
+        </div>';
+        break;
+        case 'no-user';
+        $time = 2;
+        $page = "login";
+        echo '<div class="primairy mx-auto mt-5 alert-danger" role="alert ">
+        user does not exist
+        <hr>
+        please enter an existing user or register a new user 
+        </div>';
+        break;
+        case 'field-empty';
+        $time = 2;
+        $page = $next_page;
+        echo '<div class="primairy mx-auto mt-5 alert-danger" role="alert ">
+        one or both fields were left empty
+        <hr>
+        please enter all fields to register
+        </div>';
+        break;
     default:
             // goes to the standard refresh page "home.php"
         header("location: ./index.php?content=home");
         break;
-}
     // refreshes to a new page
 header("Refresh: $time; url=./index.php?content=$page");
