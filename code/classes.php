@@ -177,11 +177,13 @@ class activate extends register {
 class login extends register { 
 
     public $result;
+    public $role;
 
     function check_fields(){
         $result = isset($this->username) && isset($this->password);
         return $result;
     }
+
     function check_if_user_exists(){
         $sql = "SELECT `password` FROM `users` WHERE `username` = '{$this->username}'";
         $result = mysqli_query($this->conn, $sql);
@@ -189,5 +191,20 @@ class login extends register {
         $this->result = $result_row[0];
         // Password uit db vergelijken met form password    
         return mysqli_num_rows($result);
+    }
+    function check_session(){
+        $sql = "SELECT `password` FROM `users` WHERE `username` = '{$this->username}'";
+        $result_arr = mysqli_fetch_row(mysqli_query($this->conn, $sql));
+        $result = $result_arr[0];
+        $pass_check = password_verify($this->password, $result);
+
+        return $pass_check;
+    }
+    function check_role(){
+        $sql = "SELECT role FROM `users` WHERE `username` = '{$this->username}'";
+        $result = mysqli_query($this->conn, $sql);
+        $result_row = mysqli_fetch_row($result);
+        $this->role = $result_row[0];
+        return $this->role;
     }
 }

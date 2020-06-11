@@ -17,7 +17,7 @@
                 <a class="nav-link" href="index.php?content=login">login<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active ">
-                <a class="nav-link" href="index.php?content=register">regristreer<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.php?content=register">registreer<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>

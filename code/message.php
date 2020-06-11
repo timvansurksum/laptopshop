@@ -135,9 +135,20 @@ switch ($_GET["alert"]) {
         please enter all fields to register
         </div>';
         break;
+        case 'no-login';
+        $time = 2;
+        $page = "login";
+        echo '<div class="primairy mx-auto mt-5 alert-danger" role="alert ">
+        you are not logged in 
+        <hr>
+        please log in
+        </div>';
+        break;
     default:
             // goes to the standard refresh page "home.php"
         header("location: ./index.php?content=home");
         break;
     // refreshes to a new page
-header("Refresh: $time; url=./index.php?content=$page");
+
+    }
+    header("Refresh: $time; url=./index.php?content=$page");
