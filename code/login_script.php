@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("./classes.php");
 $register = new register;
 
@@ -15,18 +17,20 @@ if (isset($username) && isset($password)) {
     if (mysqli_num_rows($result)) {
         if (password_verify($_POST["password"] , $result)) {
     // Als password klopt user = ingelogd  
-    echo "succes";   
+    $_SESSION["username"] = $username;
+    $_SESSION["password"] = $password;
+    header("location; ./index.php?content=home");
     }
     else {
-    //anders error
-    // header("location: ./index.php?content=message&alert=incorrect-password");
+    //otherwise error false password
+    header("location: ./index.php?content=message&alert=incorrect-password");
     }
-    echo 'fail2';
+    
     }
     else {
-echo "fail";
-    // als gebruiker niet bestaat = error
-    // header("location: ./index.php?content=message&alert=no-user");
+    
+    // if user doesnt exist = error
+    header("location: ./index.php?content=message&alert=no-user");
     }
 
 }
