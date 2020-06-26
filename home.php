@@ -1,102 +1,76 @@
 <?php
-include("./user_check_script.php");
+//include("./user_check_script.php");
+include("./db_conn_robin.php");
+$query = "SELECT * FROM products ORDER BY id asc";
+$result = mysqli_query($connection, $query);
+if(mysqli_num_rows($result) > 0){
+  while($row = mysqli_fetch_array($result)){
+
+  }
+}
+
 ?>
 
-<!DOCTYPE html>
-<html>
+ <div class="col-md-4">
+<form method="post" action="index.php?action=add&id=<?php echo $row["id"] ?>">
+</from> 
+</div>
 
-<div class="w3-main" style="margin-left:250px">
+<body>
 
-  <!-- Push down content on small screens -->
-  <div class="w3-hide-large" style="margin-top:83px"></div>
-  
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left">DB</p>
 
-   
-  </header>
-
-  <!-- Image header -->
-  <div class="w3-display-container w3-container">
-    <img src="1A.jpg" alt="Jeans" style="width:100%">
-    <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
-      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-      <h1 class="w3-hide-small">Werklaptops</h1>
-      
+<div class="container-fluid">
+  <div class="row col-12">
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="<?php echo $row["image"];?>" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="<?php echo $row["image"];?>" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="<?php echo $row["image"];?>" class="d-block w-100" alt="...">
     </div>
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
 
-  <div class="w3-container w3-text-grey" id="db id">
-    <p>8 items</p>
   </div>
+</div>
 
-  <!-- Product grid -->
-  <div class="w3-row w3-grayscale">
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%" >
-        <p>Connect db<br><b>db</b></p>
-      </div>
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%">
-        <p>connect db<br><b>€db</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./img/A1.jpg" style="width:100%">
-          <span class="w3-tag w3-display-topleft">New</span>
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>connect db<br><b>€db</b></p>
-      </div>
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%">
-        <p>connect db<br><b>€db</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%">
-        <p>connect db<br><b>€db</b></p>
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="./img/A1.jpg" style="width:100%">
-          <span class="w3-tag w3-display-topleft">Sale</span>
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
-          </div>
-        </div>
-        <p>database<br><b class="w3-text-red">€db</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%">
-        <p>.connect db<br><b>€db</b></p>
-      </div>
-      <div class="w3-container">
-        <img src="./img/A1.jpg" style="width:100%">
-        <p>database<br><b>€db</b></p>
-      </div>
-    </div>
-  </div>
-
- 
-  
- 
+<article class="row">       
+        <section class="col-12 col-sm-3 col-md-3">
+            <img src="./img/products/1A.jpg" alt="">
+            <h4><?php echo $row["naam"];?></h4>
+            <p><?php echo $row["beschrijving"];?></p>
+        </section>
+        <section class="col-3 col-sm-9 col-md-3">
+            <img src="./img/products/2A.jpg" alt="">
+            <h4><?php echo $row["naam"];?></h4>
+            <p><?php echo $row["beschrijving"];?></p>
+        </section>
+        <section class="col-9 col-sm-6 col-md-3">
+            <img src="./img/products/3A.jpg" alt="">
+            <h4><?php echo $row["naam"];?></h4>
+            <p><?php echo $row["beschrijving"];?></p>
+        </section>
+        <section class="col-9 col-sm-6 col-md-3">
+            <img src="./img/products/4A.jpg" alt="">
+            <h4><?php echo $row["naam"];?></h4>
+            <p><?php echo $row["beschrijving"];?></p>
+        </section>
 
 
+
+</div>
+</div>
 
 </body>
-</html>  
-
