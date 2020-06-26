@@ -31,13 +31,13 @@ if(!empty($_SESSION["shopping_cart"]))
             <td> <a href="index.php?action=delete&id=<?php echo $values["item_id"];?>"><span class="text-danger">Remove</span></a></td>
         <tr>
             <?php
-             $total = $total +  ($values["hoeveelheid"] *$values[ "prijs"]);
+             $total = $total +  ($values["hoeveelheid"] * $values[ "prijs"]);
     }
 }
 ?>
 <tr>
     <td colspan="3" align="right">Totaal:</td>
-    <td align="right"> €<?php echo number_format($total, 2); ?></td>
+    <td align="right"> €<?php echo number_format( $total , 2); ?></td>; 
 </tr>
 </table>
 </div>  
