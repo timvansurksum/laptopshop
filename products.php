@@ -1,6 +1,6 @@
 <?php
 
 //benodigde gegevens voor mysql server
-include("./connect_db.php");
+include("./db_conn_robin.php");
 
 ?>
